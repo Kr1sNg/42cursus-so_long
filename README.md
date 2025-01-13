@@ -1,2 +1,7 @@
 # 42cursus-so_long
-This 42's project is a small 2D game with minilibx
+A 42's project to create a small 2D game with minilibx
+
+--
+##### Reference
+[minilibX-linux](https://github.com/42Paris/minilibx-linux)
+[minilibX Introduction](https://aurelienbrabant.fr/blog/getting-started-with-the-minilibx)
