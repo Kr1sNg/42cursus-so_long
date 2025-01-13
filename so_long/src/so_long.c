@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/so_long.h"
+#include <mlx.h>
 #include <stdlib.h>
 
 # define WINDOW_WIDTH 600

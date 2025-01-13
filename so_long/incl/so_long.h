@@ -21,7 +21,7 @@
 
 
 
-#include "../lib/minilibx-linux/mlx.h"
-#include "../lib/minilibx-linux/mlx_int.h"
+#include <mlx.h>
+#include <mlx_int.h>
 
 #endif
