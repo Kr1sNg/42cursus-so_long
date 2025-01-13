@@ -12,10 +12,10 @@
 
 /*
 **	compile with flags:
-**	-L../path/to/the/minilibx-linux -lmlx_Linux(.a) -lX11 -lXext
+**	(-L../path/to/the/minilibx-linux) -lmlx_Linux -lX11 -lXext
 **	
 **	Linux:
-**	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+**	-lmlx_Linux -lXext -lX11
 **	
 **	MacOS:
 **	-I /usr/X11/include -g -L /usr/X11/lib -lX11 -lmlx -lXext

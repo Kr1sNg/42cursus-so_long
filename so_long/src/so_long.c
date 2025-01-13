@@ -12,10 +12,22 @@
 
 #include <mlx.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 # define WINDOW_WIDTH 600
 # define WINDOW_HEIGHT 300
 # define MLX_ERROR 1
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+int	deal_key(int key, void *param)
+{
+	ft_putchar('X');
+	return (0);
+}
 
 int	main(void)
 {
@@ -31,10 +43,10 @@ int	main(void)
 		free(win_ptr);
 		return (MLX_ERROR);
 	}
-	while (1)
-		;
-	mlx_destroy_window(mlx_ptr, win_ptr);
-	mlx_destroy_display(mlx_ptr);
-	free(mlx_ptr);
-	return (0);
+	mlx_key_hook(win_ptr, deal_key, (void *)0);
+	mlx_loop(mlx_ptr);
+	// mlx_destroy_window(mlx_ptr, win_ptr);
+	// mlx_destroy_display(mlx_ptr);
+	// free(mlx_ptr);
+	// return (0);
 }
