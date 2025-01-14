@@ -1,29 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   my_pixel_put.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 09:57:06 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/14 14:56:47 by tat-nguy         ###   ########.fr       */
+/*   Created: 2025/01/14 19:22:59 by tat-nguy          #+#    #+#             */
+/*   Updated: 2025/01/14 19:24:02 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-**	compile with flags:
-**	-L../minilibx-linux -lmlx -lX11 -lXext
-**	
-**	MacOS:
-**	-I /usr/X11/include -g -L /usr/X11/lib -lX11 -lmlx -lXext
-**
-*/
+#include "../minilibx-linux/mlx.h"
+#include <X11/keysym.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-
-
-
-# include "../minilibx-linux/mlx.h"
-
-#endif

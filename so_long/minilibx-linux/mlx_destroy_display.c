@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 09:57:06 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/14 14:56:47 by tat-nguy         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-**	compile with flags:
-**	-L../minilibx-linux -lmlx -lX11 -lXext
-**	
-**	MacOS:
-**	-I /usr/X11/include -g -L /usr/X11/lib -lX11 -lmlx -lXext
-**
-*/
+#include "mlx_int.h"
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-
-
-
-# include "../minilibx-linux/mlx.h"
-
-#endif
+int	mlx_destroy_display(t_xvar *xvar)
+{
+	XCloseDisplay(xvar->display);
+}
