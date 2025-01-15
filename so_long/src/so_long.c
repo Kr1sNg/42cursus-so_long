@@ -6,15 +6,11 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:00:14 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/14 15:31:22 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/15 20:11:09 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../include/so_long.h"
-#include "../minilibx-linux/mlx.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <X11/keysym.h>
+#include "../include/so_long.h"
 
 # define WINDOW_WIDTH 600
 # define WINDOW_HEIGHT 300
