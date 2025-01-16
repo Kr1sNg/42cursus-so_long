@@ -11,11 +11,15 @@
 /* ************************************************************************** */
 
 /*
-**	compile with flags:
+**	Linux:
+**	make && ./configure
+**	flag needed to add to compile
 **	-L../minilibx-linux -lmlx -lX11 -lXext
 **	
 **	MacOS:
-**	-I /usr/X11/include -g -L /usr/X11/lib -lX11 -lmlx -lXext
+**	make && ./configure (have to install mlx first)
+** 	-I /usr/X11/include -L/usr/X11/lib -L../minilibx-linux -lmlx -lX11 -lXext    
+
 **
 */
 
