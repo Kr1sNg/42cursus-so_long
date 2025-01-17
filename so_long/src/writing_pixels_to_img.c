@@ -66,12 +66,14 @@
 // 	mlx_loop(mlx);
 // }
 
+
+
 int main(void)
 {
 	void	*mlx;
 	void	*mlx_win;
 	void	*img;
-	char	*relative_path = "11zon_fish.xpm";
+	char	*relative_path = "racoon.xpm";
 	int		img_width;
 	int		img_height;
 

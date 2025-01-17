@@ -18,8 +18,8 @@
 **	
 **	MacOS:
 **	make && ./configure (have to install mlx first)
-** 	-I /usr/X11/include -L/usr/X11/lib -L../minilibx-linux -lmlx -lX11 -lXext    
-
+** 	-I /usr/X11/include(to find X11/X.h and keysym.h) -L../minilibx-linux -lmlx -L/usr/X11/lib -lX11 -lXext    
+**	(-framework OpenGL -framework AppKit)
 **
 */
 
