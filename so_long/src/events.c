@@ -6,7 +6,7 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 20:34:33 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/15 20:39:40 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:00:29 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ typedef struct	s_data
 	void	*win_ptr;
 }	t_data;
 
-int	on_destroy(t_data *data)//, void *img_ptr)
+int	on_destroy(t_data *data, void *img)
 {
-	// mlx_destroy_image(data->mlx_ptr, img_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
+	mlx_destroy_image(data->mlx_ptr, img);
 	free(data->mlx_ptr);
 	exit(EXIT_SUCCESS);
 	return (0);
