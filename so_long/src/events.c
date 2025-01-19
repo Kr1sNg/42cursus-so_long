@@ -23,11 +23,17 @@ typedef struct	s_data
 	void	*win_ptr;
 }	t_data;
 
+
+int	handle_no_event(void *data)
+{
+	return (0);
+}
+
 int	on_destroy(t_data *data, void *img)
 {
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
-	mlx_destroy_image(data->mlx_ptr, img);
+	// mlx_destroy_image(data->mlx_ptr, img);
 	free(data->mlx_ptr);
 	exit(EXIT_SUCCESS);
 	return (0);
@@ -67,6 +73,7 @@ int	main(void)
 	// }
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img, 100, 100);
 
+	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
 	// Register key release hook
 	mlx_hook(data.win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, &data);
 
