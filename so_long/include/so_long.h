@@ -31,9 +31,12 @@
 ** :::::::::::::::::::::::::::::::::* HEADERS *:::::::::::::::::::::::::::::: **
 */
 
+#include "../libft/includes/libft.h"
 #include "../minilibx-linux/mlx.h"
-#include <stdio.h>
+#include <stdio.h> //perror
 #include <stdlib.h>
+#include <stdbool.h>
+#include <fcntl.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
 
@@ -41,12 +44,21 @@
 ** :::::::::::::::::::::::::::* DEFINE DECLARATION *::::::::::::::::::::::::: **
 */
 
+#define BUFF_SZ 1042
+#define SZ 32
 
-#define EMPTY '0'
+#define FLOOR '0'
 #define WALL '1'
-#define COLLECTIBLE 'C'
+#define COIN 'C'
 #define EXIT 'E'
 #define PLAYER 'P'
+
+// #define ESC 65307
+// #define W 119
+// #define S 115
+// #define A 97
+// #define D 100
+
 
 
 /*
@@ -54,23 +66,111 @@
 */
 
 /*
+** ...:::*** Images ***:::...
+*/
+
+typedef struct s_img
+{
+	void	*left;
+	void	*right;
+	void	*down;
+	void	*up;
+	void	*coin;
+	void	*exit_open;
+	void	*exit_close;
+	void	*wall;
+	void	*floor;
+	int		img_width;
+	int		img_height;
+}	t_img;
+
+/*
+** ...:::*** Positions of Player and Exit ***:::...
+*/
+
+typedef struct s_pos
+{
+	int	p_row; //player row
+	int	p_col; //player col
+	int	e_row; // exit row
+	int	e_col; //exit col
+}	t_pos;
+
+/*
+** ...:::*** Count and Data ***:::...
+*/
+
+typedef struct s_count
+{
+	int	count_player;
+	int	count_exit;
+	int	count_coin;
+	int	count_wall;
+	int	count_floor;
+	int	count_moves;
+	int	endgame; //for what???
+}	t_count;
+
+/*
+** ...:::*** Resolutions ***:::...
+*/
+
+typedef struct s_resolu
+{
+	int	map_width;
+	int	map_height;
+}	t_resolu;
+
+/*
+** ...:::*** Matrix and Maps ***:::...
+*/
+
+typedef struct s_map
+{
+	int			numoflines;
+	int			columns;
+	int			rows;
+	int			size_matrix;
+	char		**matrix;
+	t_pos		positions;
+	t_resolu	resolution;
+}	t_map;
+
+/*
 ** ...:::*** Main Controller ***:::...
 */
-typedef struct s_data
+
+typedef struct s_game
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	int		argc_tmp;
-	char	**argv_tmp;
-	
-		
-	
-}
+	void		*mlx_ptr;
+	void		*win_ptr;
+	int			argc_tmp;
+	char		**argv_tmp;
+	t_img		game_img;
+	t_pos		position;
+	t_count		game_count;
+	t_resolu	resolution;
+	t_map		map;
+}	t_game;
+
 
 /*
 ** ::::::::::::::::::::::::::* FUNCTION PROTOTYPES *::::::::::::::::::::::::: **
 */
 
+/*
+** ...:::*** Errors ***:::...
+*/
+
+void	ft_error_init(int n);
+void	ft_error_map(int n);
+
+/*
+** ...:::*** Maps ***:::...
+*/
+
+int	ft_open_map(char *map, t_game *game);
+int	ft_read_map(int fd, t_game *game);
 
 
 
