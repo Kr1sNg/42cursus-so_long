@@ -40,6 +40,19 @@ static int	ft_count_lines(int fd)
 	return (count);
 }
 
+static bool	ft_map_extension(char *map)
+{
+	char	*ext;
+	int		len;
+
+	ext = ".ber";
+	len = ft_strlen(map);
+	if (len < 4)
+		return (false);
+	return (!ft_strcmp(&map[len - 4], ext));
+}
+
+
 // Open and Read <map>.ber file. Return 0 if can't open, 1 is good
 int	ft_open_map(char *map, t_game *game)
 {
@@ -51,12 +64,12 @@ int	ft_open_map(char *map, t_game *game)
 	if (fd == -1)
 		return (0);
 	game->map.numoflines = ft_count_lines(fd);
-	if (!game->map.numoflines || game->map.numoflines < 3)
-	{
-		close(fd);
-		ft_free_map(game); //TODO
-		return (0);
-	}
+	// if (!game->map.numoflines || game->map.numoflines < 3)
+	// {
+	// 	close(fd);
+	// 	ft_free_map(game);
+	// 	return (0);
+	// }
 	if (!ft_read_map(fd, game))
 	{
 		close(fd);
@@ -75,13 +88,10 @@ int	ft_read_map(int fd, t_game *game)
 
 	game->map.matrix = ft_calloc(game->map.numoflines + 1, sizeof(char *));
 	if (!game->map.matrix)
-	{
-		ft_free_map(game);
 		return (0);
-	}
-	i = 0;
 	buffer = NULL;
-	while (1)
+	i = 0;
+	while (i < game->map.numoflines)
 	{
 		buffer = get_next_line(fd);
 		if (!buffer)
@@ -89,17 +99,20 @@ int	ft_read_map(int fd, t_game *game)
 		game->map.matrix[i] = buffer;
 		i++;
 	}
-	if (!ft_check_read(game))
-		return (0);
-	return (1);
-}
-
-int	ft_check_read(t_game *game)
-{
-	if (game->map.matrix[0] == NULL || !ft_map_dimensions(game) || !ft_valid_map(game)) //TODO
+	if (i < game->map.numoflines || !ft_map_dimensions(game) || !ft_valid_map(game))
 	{
 		ft_free_map(game);
 		return (0);
 	}
 	return (1);
 }
+
+// int	ft_check_map(t_game *game)
+// {
+// 	if (game->map.matrix[0] == NULL || !ft_map_dimensions(game) || !ft_valid_map(game)) //TODO
+// 	{
+// 		ft_free_map(game);
+// 		return (0);
+// 	}
+// 	return (1);
+// }

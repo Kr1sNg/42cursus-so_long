@@ -10,101 +10,80 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../include/so_long.h"
+#include "../include/so_long.h"
 
-// void	ft_error_fd(int fd, t_data **game)
-// {
-// 	if (fd == -1)
-// 	{
-// 		free(*game);
-// 		ft_printf("FD Error\n");
-// 		exit(EXIT_FAILURE);
-// 	}
-// }
-
-// void	ft_no_lines(int i, t_data **game)
-// {
-// 	if (i == 0)
-// 	{
-// 		free((*game)->map);
-// 		free(*game);
-// 		exit(EXIT_FAILURE);
-// 	}
-// }
-
-// int	ft_check_map_malloc(int fd, t_data **game)
-// {
-// 	(*game)->map = (char **)malloc(sizeof(char *) * (HEIGHT + 1));
-// 	if (!(*game)->map)
-// 	{
-// 		close(fd);
-// 		ft_printf("Error malloc map\n");
-// 		return (0);
-// 	}
-// 	return (1);
-// }
-
-// bool	check_rectangular(t_data **game)
-// {
-// 	int linewidth;
-// 	int row_index; // y: row index
-// 	int column_index; // x: column index
-
-// 	linewidth = 0;
-// 	row_index = 0;
-// 	while (((*game)->map[0][linewidth]) && ((*game)->map[0][linewidth] != '\n'))
-// 		linewidth++;
-// 	while ((*game)->map[row_index])
-// 	{
-// 		column_index = 0;
-// 		while (((*game)->map[row_index][column_index]) && ((*game)->map[row_index][column_index] != '\n'))
-// 			column_index++;
-// 		if (column_index != linewidth)
-// 			return (false);
-// 		row_index++;
-// 	}
-// 	return (true);
-// }
-
-// bool	check_border_walls(t_data **game)
-// {
-// 	int	linewidth;
-// 	int	row_index; //y: row index
-// 	int column_index; //x: column index
-
-// 	linewidth = 0;
-// 	while (((*game)->map[0][linewidth]) && ((*game)->map[0][linewidth] != '\n'))
-// 		linewidth++;
-// 	// check left and right walls
-// 	row_index = 0;
-// 	while ((*game)->map[row_index])
-// 	{
-// 		if (((*game)->map[row_index][0] != WALL) || ((*game)->map[row_index][linewidth - 1] != WALL))
-// 			return (false);
-// 		row_index++;
-// 	}
-// 	// check first and last row is walls
-// 	column_index = 0;
-// 	while (column_index < linewidth)
-// 	{
-// 		if ((*game)->map[0][column_index] != WALL || (*game)->map[row_index - 1][column_index] != WALL)
-// 			return (false);
-// 		column_index++;
-// 	}
-// 	return (true);
-// }
-
-#include <stdbool.h>
-#include "../libft/includes/libft.h"
-
-bool	ft_map_extension(char *map)
+// set up dimension for map
+int	ft_map_dimensions(t_game *game)
 {
-	char	*ext;
-	int		len;
+	int	i;
 
-	ext = ".ber";
-	len = ft_strlen(map);
-	if (len < 4)
-		return (false);
-	return (!ft_strcmp(&map[len - 4], ext));
+	i = 0;
+	while (game->map.matrix[0][i] != '\n')
+		i++;
+	if (i == 0)
+		return (0);
+	game->map.numofcols = i;
+	game->map.size_matrix = game->map.numoflines * game->map.numofcols;
+	return (1);
 }
+
+bool	ft_valid_map(t_game *game)
+{
+	if (!(ft_map_objects(game)))
+		return (false);
+	if (!(ft_map_shape(game)))
+		return (false);
+	if (!(ft_map_border(game)))
+		return (false);
+	return (true);
+}
+
+bool	ft_map_shape(t_game *game)
+{
+	int numofcols;
+	int row; // y: row index
+	int col; // x: column index
+
+	if (!game->map.numoflines || game->map.numoflines < 3)
+		return (false);
+	numofcols = game->map.numofcols;
+	row = 0;
+	while (game->map.matrix[row])
+	{
+		col = 0;
+		while (game->map.matrix[row][col] && game->map.matrix[row][col] != '\n')
+			col++;
+		if (col != numofcols)
+			return (false);
+		row++;
+	}
+	return (true);
+}
+
+bool	ft_map_border(t_game *game)
+{
+	int	row; //y: row index
+	int col; //x: column index
+
+	// check left and right walls
+	row = 0;
+	col = game->map.numofcols;
+	while (row < game->map.numoflines)
+	{
+		if ((game->map.matrix[row][0] != WALL) || (game->map.matrix[row][col - 1] != WALL))
+			return (false);
+		row++;
+	}
+	// check first and last row is walls
+	col = 0;
+	while (col < game->map.numofcols)
+	{
+		if ((game->map.matrix[0][col] != WALL) || (game->map.matrix[row - 1][col] != WALL))
+			return (false);
+		col++;
+	}
+	return (true);
+}
+
+
+

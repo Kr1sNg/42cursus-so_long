@@ -117,7 +117,7 @@ typedef struct s_count
 
 typedef struct s_resolu
 {
-	int	map_width;
+	int	map_width; //useless
 	int	map_height;
 }	t_resolu;
 
@@ -127,13 +127,13 @@ typedef struct s_resolu
 
 typedef struct s_map
 {
-	int			numoflines;
-	int			columns;
-	int			rows;
+	int			numoflines; //used
+	int			numofcols; //used
+	int			rows; //useless
 	int			size_matrix;
-	char		**matrix;
+	char		**matrix; //used
 	t_pos		positions;
-	t_resolu	resolution;
+	t_resolu	resolution; //useless
 }	t_map;
 
 /*
@@ -172,6 +172,14 @@ void	ft_error_map(int n);
 int	ft_open_map(char *map, t_game *game);
 int	ft_read_map(int fd, t_game *game);
 
+bool	ft_map_extension(char *map);
+
+
+/*
+** ...:::*** Free ***:::...
+*/
+
+void	ft_free_map(t_game *game);
 
 
 #endif
