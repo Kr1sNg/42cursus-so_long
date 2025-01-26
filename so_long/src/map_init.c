@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_img.c                                         :+:      :+:    :+:   */
+/*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:45:48 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/14 17:15:32 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/26 21:03:58 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-// count lines of map to prepare for calloc
+static bool	ft_map_extension(char *path)
+{
+	char	*ext;
+	int		len;
+
+	ext = ".ber";
+	len = ft_strlen(path);
+	if (len < 4)
+		return (false);
+	return (!ft_strcmp(&path[len - 4], ext));
+}
+
 static int	ft_count_lines(int fd)
 {
 	int		count;
-	char	buffer[BUFF_SZ];
+	char	buffer[BUFFER_SIZE];
 	ssize_t	n_read;
 	int		i;
 
 	count = 0;
 	while (1)
 	{
-		n_read = read(fd, buffer, BUFF_SZ);
+		n_read = read(fd, buffer, BUFFER_SIZE);
 		if (n_read < 0)
 			return (0);
 		if (n_read == 0)
@@ -40,58 +51,36 @@ static int	ft_count_lines(int fd)
 	return (count);
 }
 
-static bool	ft_map_extension(char *map)
-{
-	char	*ext;
-	int		len;
-
-	ext = ".ber";
-	len = ft_strlen(map);
-	if (len < 4)
-		return (false);
-	return (!ft_strcmp(&map[len - 4], ext));
-}
-
-
-// Open and Read <map>.ber file. Return 0 if can't open, 1 is good
-int	ft_open_map(char *map, t_game *game)
+static int	ft_get_lines(char *map)
 {
 	int	fd;
+	int	lines;
 
-	if (!ft_map_extension(map))
-		return (0);
+	lines = 0;
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
 		return (0);
-	game->map.numoflines = ft_count_lines(fd);
-	// if (!game->map.numoflines || game->map.numoflines < 3)
-	// {
-	// 	close(fd);
-	// 	ft_free_map(game);
-	// 	return (0);
-	// }
-	if (!ft_read_map(fd, game))
-	{
-		close(fd);
-		ft_free_map(game);
+	lines = ft_count_lines(fd);
+	if (close(fd) == -1)
 		return (0);
-	}
-	close(fd);
-	return (1); //means OK
+	return (lines);
 }
 
 // read map from file, validate and set it in game
-int	ft_read_map(int fd, t_game *game)
+static int	ft_read_map(int fd, t_game *game)
 {
 	int		i;
 	char	*buffer;
 
 	game->map.matrix = ft_calloc(game->map.numoflines + 1, sizeof(char *));
 	if (!game->map.matrix)
-		return (0);
+	{
+		ft_free_map(game);
+		return (ft_error_map(24), 0);
+	}
 	buffer = NULL;
 	i = 0;
-	while (i < game->map.numoflines)
+	while (1)
 	{
 		buffer = get_next_line(fd);
 		if (!buffer)
@@ -99,20 +88,29 @@ int	ft_read_map(int fd, t_game *game)
 		game->map.matrix[i] = buffer;
 		i++;
 	}
-	if (i < game->map.numoflines || !ft_map_dimensions(game) || !ft_valid_map(game))
-	{
-		ft_free_map(game);
-		return (0);
-	}
+	game->map.matrix[i] = NULL;
+	if (!ft_map_dimensions(game) || !ft_valid_map(game))
+		return (ft_free_map(game), 0);
 	return (1);
 }
 
-// int	ft_check_map(t_game *game)
-// {
-// 	if (game->map.matrix[0] == NULL || !ft_map_dimensions(game) || !ft_valid_map(game)) //TODO
-// 	{
-// 		ft_free_map(game);
-// 		return (0);
-// 	}
-// 	return (1);
-// }
+// Open and Read <map>.ber file. Return 0 if can't read!
+int	ft_open_map(char *path, t_game *game)
+{
+	int		fd;
+
+	if (!ft_map_extension(path))
+		ft_error_map(23);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		ft_error_map(22);
+	game->map.numoflines = ft_get_lines(path);
+	if (!game->map.numoflines || !ft_read_map(fd, game))
+	{
+		close(fd);
+		ft_free_map(game);
+		return (0);
+	}
+	close(fd);
+	return (1);
+}
