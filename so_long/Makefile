@@ -29,11 +29,11 @@ SRC = $(wildcard $(DIR_SRC)/*.c)
 OBJ = $(SRC:.c=.o)
 
 # Include
-INCLUDES	= -Iinclude -I/usr/X11/include -Iminilibx
+INCLUDES	= -Iinclude -Iminilibx
 
 # Compiler and Flags
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -I/usr/X11/include
 RM			= rm -rf
 LIBFLAGS	= -L$(LIBFT_DIR) -lft
 MLXFLAGS	= -L$(MLX_DIR) -lmlx -L/usr/X11/lib -lX11 -lXext    

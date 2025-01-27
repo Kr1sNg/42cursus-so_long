@@ -83,7 +83,7 @@ int	ft_handle_keypress(int keysym, t_game *game)
 		game->img.player = game->img.down;
 		ft_moving(game, +1, 0);
 	}
-	else if (keysym == XK_d || XK_Right)
+	else if (keysym == XK_d || keysym == XK_Right)
 	{
 		game->img.player = game->img.right;
 		ft_moving(game, 0, +1);
