@@ -66,4 +66,4 @@ fclean:	clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus so_long
+.PHONY: all clean fclean re bonus
