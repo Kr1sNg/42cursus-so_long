@@ -60,7 +60,7 @@ clean:
 	@$(MAKE) -C $(MLX_DIR) clean
 
 fclean:	clean
-	@$(RM) so_long
+	@$(RM) $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@$(MAKE) -C $(MLX_DIR) clean
 
