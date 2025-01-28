@@ -12,6 +12,7 @@
 
 # Name
 NAME = so_long
+BONUS = so_long_bonus
 
 # Libft
 LIBFT_DIR	= ./libft
@@ -23,10 +24,13 @@ MLX		= $(MLX_DIR)/libmlx.a
 
 # Source Files
 DIR_SRC	= src
+DIR_BONUS = bonus
 
 # Paths and Files
 SRC = $(wildcard $(DIR_SRC)/*.c)
+SRC_BONUS = $(wildcard $(DIR_BONUS)/*.c)
 OBJ = $(SRC:.c=.o)
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 # Include
 INCLUDES	= -Iinclude -Iminilibx
@@ -41,6 +45,8 @@ MLXFLAGS	= -L$(MLX_DIR) -lmlx -L/usr/X11/lib -lX11 -lXext
 # Targets
 all:	$(LIBFT) $(MLX) $(NAME)
 
+bonus:	$(LIBFT) $(MLX)	$(BONUS)
+
 # Build libft
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -52,15 +58,19 @@ $(MLX):
 # Build so_long
 $(NAME):	$(OBJ)
 	@$(CC) $(OBJ) -o $(NAME) $(INCLUDES) $(CFLAGS) $(LIBFLAGS) $(MLXFLAGS)
-	
+
+# Build bonus
+$(BONUS):	$(OBJ_BONUS)
+	@$(CC) $(OBJ_BONUS) -o $(BONUS) $(INCLUDES) $(CFLAGS) $(LIBFLAGS) $(MLXFLAGS)
+
 # Clean
 clean:
-	@$(RM) $(OBJ)
+	@$(RM) $(OBJ) $(OBJ_BONUS)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 	@$(MAKE) -C $(MLX_DIR) clean
 
 fclean:	clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(BONUS)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@$(MAKE) -C $(MLX_DIR) clean
 

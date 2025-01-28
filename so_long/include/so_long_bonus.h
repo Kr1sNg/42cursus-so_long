@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 09:57:06 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/28 15:50:07 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:25:35 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 **
 */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 /*
 ** :::::::::::::::::::::::::::::::::* HEADERS *:::::::::::::::::::::::::::::: **
@@ -52,12 +52,7 @@
 # define COIN 'C'
 # define EXIT 'E'
 # define PLAYER 'P'
-
-// #define ESC 65307
-// #define W 119
-// #define S 115
-// #define A 97
-// #define D 100
+# define ENEMY 'I'
 
 /*
 ** :::::::::::::::::::::::::::* STRUCT DECLARATION *::::::::::::::::::::::::: **
@@ -79,6 +74,9 @@ typedef struct s_img
 	void	*exit_close;
 	void	*wall;
 	void	*floor;
+	void	*enemy;
+	int		img_width;
+	int		img_height;
 }	t_img;
 
 /*
@@ -103,6 +101,8 @@ typedef struct s_count
 	int	wall;
 	int	floor;
 	int	moves;
+	int	enemy;
+	int	animation;
 }	t_count;
 
 /*
@@ -158,11 +158,12 @@ void	ft_error_map(int n);
 int		ft_open_map(char *path, t_game *game);
 
 // map_check
-int		ft_map_dimensions(t_game *game);
 bool	ft_valid_map(t_game *game);
 
-// map_check_floodfill
+// map_check_floofill
+
 bool	ft_map_path(t_game *game);
+int		ft_map_dimensions(t_game *game);
 
 /*
 ** ...:::*** Free ***:::...
@@ -181,12 +182,24 @@ void	ft_game_init(t_game	*game);
 // game start
 void	ft_game_start(t_game *game);
 int		ft_game_draw(t_game *game);
+int		ft_play_moves(t_game *game);
+int		ft_gameplay_update(void *param);
 
 // game event
+
 void	ft_locate_player(t_game *game);
 int		ft_handle_keypress(int keysym, t_game *game);
 
+// game_event_enemy
+void	ft_enemy_moving(t_game *game);
+
 // game exit
 int		ft_game_exit(t_game *game);
+
+/*
+** ...:::*** Animation ***:::...
+*/
+
+int		ft_animation(t_game *game);
 
 #endif
