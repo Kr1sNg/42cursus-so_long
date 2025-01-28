@@ -6,7 +6,7 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:25:25 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/28 15:42:32 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:30:10 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	ft_moving(t_game *game, int move_row, int move_col)
 	else if (curr_pos == EXIT && game->count.coin == 0)
 	{
 		game->map.matrix[game->position.p_row][game->position.p_col] = FLOOR;
-		ft_printf("👑 You WIN in %i movements!\n", (game->count.moves + 1));
+		ft_printf("\t👑 You WIN in %i movements!\n", (game->count.moves + 1));
 		ft_game_exit(game);
 	}
 }
