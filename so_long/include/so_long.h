@@ -6,7 +6,7 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 09:57:06 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/21 16:45:17 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:50:07 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,14 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_img		img;
-	t_pos		position;
-	t_count		count;
-	t_map		map;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	img;
+	t_pos	position;
+	t_count	count;
+	t_map	map;
+	int		path_exit;
+	int		path_coin;
 }	t_game;
 
 /*
@@ -159,6 +161,9 @@ int		ft_open_map(char *path, t_game *game);
 int		ft_map_dimensions(t_game *game);
 bool	ft_valid_map(t_game *game);
 
+// map_check_floodfill
+bool	ft_map_path(t_game *game);
+
 /*
 ** ...:::*** Free ***:::...
 */
@@ -178,6 +183,7 @@ void	ft_game_start(t_game *game);
 int		ft_game_draw(t_game *game);
 
 // game event
+void	ft_locate_player(t_game *game);
 int		ft_handle_keypress(int keysym, t_game *game);
 
 // game exit

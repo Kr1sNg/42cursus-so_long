@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_start.c                                       :+:      :+:    :+:   */
+/*   game_start_bns.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 20:39:36 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/26 21:02:59 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:17:07 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,22 @@ int	ft_game_draw(t_game *game)
 // print current numbers of movement to game's screen
 int	ft_play_moves(t_game *game)
 {
-	char *movement;
+	char	*movement;
 
-	mlx_string_put(game->mlx_ptr, game->win_ptr, 1, 1, 0x00FFFFFF,
-			"Number of movements: ");
+	mlx_string_put(game->mlx_ptr, game->win_ptr, 15, 15, 0x00FFFF00,
+		"Move: ");
 	movement = ft_itoa(game->count.moves);
-	mlx_string_put(game->mlx_ptr, game->win_ptr, 60, 1, 0x00FFFFFF, movement);
+	mlx_string_put(game->mlx_ptr, game->win_ptr, 15, 30, 0x00FFFF00, movement);
 	free(movement);
+	return (0);
+}
+
+int	ft_gameplay_update(void *param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	ft_animation(game);
+	ft_game_draw(game);
 	return (0);
 }

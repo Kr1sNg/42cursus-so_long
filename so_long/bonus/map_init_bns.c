@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init.c                                         :+:      :+:    :+:   */
+/*   map_init_bns.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:45:48 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/26 21:03:58 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:53:21 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ int	ft_open_map(char *path, t_game *game)
 	game->map.numoflines = ft_get_lines(path);
 	if (!game->map.numoflines || !ft_read_map(fd, game))
 	{
-		close(fd);
 		ft_free_map(game);
+		close(fd);
 		return (0);
 	}
 	close(fd);

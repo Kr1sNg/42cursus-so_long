@@ -6,7 +6,7 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:13:19 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/26 21:03:41 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:02:55 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_map_dimensions(t_game *game)
 	int	i;
 
 	i = 0;
+	if (!game->map.matrix[0])
+		return (0);
 	while (game->map.matrix[0][i] != '\n' && game->map.matrix[0][i] != '\0')
 		i++;
 	if (i < 3)
@@ -107,6 +109,8 @@ bool	ft_valid_map(t_game *game)
 	if (!(ft_map_shape(game)))
 		return (false);
 	if (!(ft_map_border(game)))
+		return (false);
+	if (!(ft_map_path(game)))
 		return (false);
 	return (true);
 }

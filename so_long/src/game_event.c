@@ -6,13 +6,13 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:25:25 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/26 21:01:51 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:42:32 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-static void	ft_locate_player(t_game *game)
+void	ft_locate_player(t_game *game)
 {
 	int	col;
 	int	row;

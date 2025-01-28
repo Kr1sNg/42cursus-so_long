@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   error_bns.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:00:14 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/26 21:00:55 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:50:37 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_error_init(int n)
 void	ft_error_map(int n)
 {
 	if (n == 20)
-		ft_printf("Error!\nUsage: ./so_long map/<map>.ber\n");
+		ft_printf("Error!\nUsage: ./so_long_bonus map/<map>.ber\n");
 	else if (n == 21)
 		ft_printf("Error!\nInvalid map!\n");
 	else if (n == 22)
