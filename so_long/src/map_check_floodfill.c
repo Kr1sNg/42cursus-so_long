@@ -26,10 +26,13 @@ static void	ft_floodfill(t_game *game, char **matrix, t_pos curr)
 {
 	if (matrix[curr.p_row][curr.p_col] == WALL)
 		return ;
+	else if (matrix[curr.p_row][curr.p_col] == EXIT)
+	{
+		matrix[curr.p_row][curr.p_col] = WALL;
+		return ;
+	}
 	else if (matrix[curr.p_row][curr.p_col] == COIN)
 		game->path_coin++;
-	else if (matrix[curr.p_row][curr.p_col] == EXIT)
-		game->path_exit = 1;
 	matrix[curr.p_row][curr.p_col] = WALL;
 	ft_floodfill(game, matrix, (t_pos){curr.p_row + 1, curr.p_col});
 	ft_floodfill(game, matrix, (t_pos){curr.p_row - 1, curr.p_col});
@@ -37,10 +40,35 @@ static void	ft_floodfill(t_game *game, char **matrix, t_pos curr)
 	ft_floodfill(game, matrix, (t_pos){curr.p_row, curr.p_col - 1});
 }
 
+static bool	ft_count_rest(char **matrix)
+{
+	int	col;
+	int	row;
+	int	count_e;
+	int	count_c;
+
+	count_e = 0;
+	count_c = 0;
+	row = -1;
+	while (matrix[++row])
+	{
+		col = -1;
+		while (matrix[row][++col])
+		{
+			if (matrix[row][col] == EXIT)
+				count_e++;
+			else if (matrix[row][col] == COIN)
+				count_c++;
+		}
+	}
+	return (count_c == 0 && count_e == 0);
+}
+
 bool	ft_map_path(t_game *game)
 {
 	char	**matrix_path;
 	int		i;
+	bool	a;
 
 	i = -1;
 	matrix_path = ft_calloc(game->map.numoflines + 1, sizeof(char *));
@@ -53,6 +81,7 @@ bool	ft_map_path(t_game *game)
 		matrix_path[i] = ft_strdup(game->map.matrix[i]);
 	ft_locate_player(game);
 	ft_floodfill(game, matrix_path, game->position);
+	a = ft_count_rest(matrix_path);
 	ft_free_matrix_path(matrix_path);
-	return (game->path_exit == 1 && (int)game->path_coin == game->count.coin);
+	return (a == true && (int)game->path_coin == game->count.coin);
 }
