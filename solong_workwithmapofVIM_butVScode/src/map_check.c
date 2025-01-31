@@ -6,7 +6,7 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:13:19 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/28 16:02:55 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:59:40 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,18 @@ static bool	ft_map_shape(t_game *game)
 	int	col;
 
 	numofcols = game->map.numofcols;
-	row = -1;
-	while (game->map.matrix[++row])
+	row = 0;
+	while(row < game->map.numoflines - 1)
 	{
 		col = 0;
 		while (game->map.matrix[row][col] && game->map.matrix[row][col] != '\n')
 			col++;
 		if (col != numofcols)
 			return (false);
+		row++;
 	}
+	if ((int)ft_strlen(game->map.matrix[row]) != numofcols && (int)ft_strlen(game->map.matrix[row]) != numofcols - 1)
+		return (false);
 	return (true);
 }
 
@@ -79,10 +82,10 @@ static bool	ft_map_objs(t_game *game)
 	int	col;
 
 	row = -1;
-	while (++row < game->map.numoflines)
+	while (game->map.matrix[++row])
 	{
 		col = -1;
-		while (++col < game->map.numofcols)
+		while (game->map.matrix[row][++col])
 		{
 			if (game->map.matrix[row][col] == PLAYER)
 				game->count.player++;

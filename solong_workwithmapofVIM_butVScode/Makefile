@@ -6,7 +6,7 @@
 #    By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/26 23:27:36 by tat-nguy          #+#    #+#              #
-#    Updated: 2025/01/26 23:27:42 by tat-nguy         ###   ########.fr        #
+#    Updated: 2025/01/31 14:31:38 by tat-nguy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ INCLUDES	= -Iinclude -Iminilibx
 
 # Compiler and Flags
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I/usr/X11/include
+CFLAGS		= -Wall -Wextra -Werror -I/usr/X11/include -g
 RM			= rm -rf
 LIBFLAGS	= -L$(LIBFT_DIR) -lft
 MLXFLAGS	= -L$(MLX_DIR) -lmlx -L/usr/X11/lib -lX11 -lXext    

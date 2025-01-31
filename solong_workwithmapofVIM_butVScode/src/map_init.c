@@ -6,7 +6,7 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:45:48 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/29 20:27:37 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/01/31 15:00:57 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static int	ft_count_lines(int fd)
 	while ((n_read = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		i = 0;
-		while (i < n_read)
+		while (i <= n_read)
 		{
-			if (buffer[i] == '\n')
+			if (buffer[i] == '\n' || buffer[i] == '\0')
 				count++;
 			i++;
 		}
@@ -46,6 +46,22 @@ static int	ft_count_lines(int fd)
 		return (0);
 	return (count);
 }
+
+/*
+
+
+char* buffer = "1111111 \n 1C11111 \n 1E11111 \n 1P110C1\n1111111";
+
+char **buffer { [0] ->	[1111111]
+			[1] ->	,[1C11111]
+			[2] ->	,[1E11111]
+			[3] ->	,[1P110C1]
+			[4] ->	,[1111111]
+			}
+char [0]
+char* buffer = "1111111 \n 1C11111 \n 1E11111 \n 1P110C1\n1111111";
+
+*/
 
 
 // int	ft_count_lines(int fd)
