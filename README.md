@@ -1,8 +1,13 @@
-# so long - and thanks to all the fish
-A 42's project to create a small 2D game with minilibx
+# 🎮 &nbsp; so longgggg
+# &emsp; &emsp; &emsp; *and thanks to all the fish* &nbsp; 🐟
+*A 42's project to create a small 2D game with **minilibx**.*
 
+---
+![Screenshot from 2025-01-31 15-33-27](https://github.com/user-attachments/assets/d1c4522f-2f78-4b27-8f66-d17f18cdd8cf)
 
-## Requirement
+---
+
+## 🎴 Requirement
 
 Objective of this project is to improve skills in the following areas: window management, event handling, colors, textures, etc
 
@@ -26,13 +31,13 @@ By using the [MiniLibX](https://github.com/42Paris/minilibx-linux) graphical lib
 
 
 ---
-## Using MiniLibX
+## 📍 Using MiniLibX
 The MiniLibX, or MLX, is a framework built by Olivier Crouzet on top of X11, a window system developed back in 1984. The MLX is a beginner-friendly C API to interact with the X11 system behind it.
 
-### 1 - Including file
+#### 1 - Including file
 Header file `mlx.h` should be included for a correct use of the MiniLibX API.
 
-### 2 - Initiation
+#### 2 - Initiation
 #### `mlx_init`
 function will create connection between software and the display. It must be called before using any other functions.
 ```
@@ -43,7 +48,7 @@ No parameters are needed, and it will return a `void *` identifier, used for fur
 #### `mlx_destroy_display`
 Free MLX
 
-### 3 - Managing windows
+#### 3 - Managing windows
 #### `mlx_new_window`
 Create a new windlow on the screen
 ```
@@ -70,9 +75,7 @@ They both use the same parameters:
 - `mlx_ptr` : the screen connection identifier
 - `win_ptr` : the window identifier
 
-Return ?
-
-### 4 - Drawing inside windows
+#### 4 - Drawing inside windows
 #### `mlx_pixel_put` and `mlx_string_put`
 This function draws a defined pixel or `string` in the window `win_ptr` using the (`x`, `y`) coordinates, and the specified `color`.
 ```
@@ -81,7 +84,7 @@ int	mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color, char *s
 ```
 The `color` parameter has an integer type, using RGB color mode.
 
-### 5 - Manipulating images
+#### 5 - Manipulating images
 #### `mlx_new_image`
 creates a new image in memory
 ```
@@ -109,7 +112,7 @@ char	*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel, int *size_line, int 
 - `img_ptr` : the identifier to specify the image to use
 - `bits_per_pixel` : pointer to integer which is filled with the number of bits needed to represent a pixel color (also called the depth of the image)
 - `size_line` : pointer to integer which is the number of bytes used to store one line of the image in memory.
-- `endian` : pointer to integer which tells us wether the pixel color in the image needs to be stored in litte endian (`endian == 0`), or big endian (`endian == 1`).
+- `endian` : pointer to integer which tells us whether the pixel color in the image needs to be stored in little endian (`endian == 0`), or big endian (`endian == 1`).
 
 It returns a `char *` address that represents the beginning of the memory area where the image is stored. From this address, the first `bits_per_pixel` bits represent the color of the first pixel in the first line of the image. The second group of `bits_per_pixel` bits represent the second pixel of the first line, and so on. Add `size_line` to the address to get the beginning of the second line. We can reach any pixels of the image that way. 
 
@@ -119,7 +122,7 @@ Frees the given image
 int	mlx_destroy_image(void *mlx_ptr, void *img_ptr);
 ```
 
-### 6 - Storing color inside images
+#### 6 - Storing color inside images
 Depending on the display, the number of bits used to store a pixel color can change.
 #### `mlx_get_color_value`
 It takes a standard RGB `color` parameter, and returns an `unsigned int` value.
@@ -127,7 +130,7 @@ It takes a standard RGB `color` parameter, and returns an `unsigned int` value.
 unsigned int	mlx_get_color_value(void *mlx_ptr, int color);
 ```
 
-### 7 - XPM Images
+#### 7 - XPM Images
 #### `mlx_xpm_to_image` and `mlx_xpm_file_to_image`
 These functions will create a new image in the same way. They will fill it using the specified `xpm_data` or `filename`, depending on which function is used.
 
@@ -137,7 +140,7 @@ void	*mlx_xpm_file_to_image(void *mlx_ptr, char *filename, int *width, int *heig
 ```
 Note that MLX does not use the standard Xpm library to deal with xpm images. We may not be able to read all types of xpm images. It however handles transparency.
 
-### 8 - Handle events
+#### 8 - Handle events
 The X-Window (and MacOSX graphical) system is bi-directionnal. On one hand, it sends orders to the screen to display pixels, images,... On the other hand, it can get information from the keyboard and mouse associated to the screen, those recieves call "events".
 
 #### `mlx_loop`
@@ -175,7 +178,7 @@ int	mlx_loop_hook(void *mlx_ptr, int (*funct_ptr)(), void *param);
 *see `keycode` in `X11/keysymdef.h` to know which key is pressed*
 
 
-### Linking MiniLibX
+#### 9 - Linking MiniLibX
 To use MiniLibX functions, we need to link software with several libraries, include the MiniLibX library itself.
 
 To do this, simply add the following arguments at linking time:
@@ -189,20 +192,54 @@ In MacOS, we need to add link to include for headers of X11 with:
 -I /usr/X11/include
 ```
 
+---
 
-
+![Screenshot from 2025-01-31 15-36-01](https://github.com/user-attachments/assets/66ee7d99-89e2-4807-820c-af4fe4747fcc)
 
 ---
-## Project Roadmap
-### Map Handling
+## ▶️ Play the game
 
-### Image Creation and Showing
+### 1 - Map Mandatory
+In the folder **so_long**, run the command to compile program `so_long`
+```
+make re
+```
+Run `so_long` by choosing the valid map you want
+```
+./so_long map/valid/<name_of_map>.ber
+```
+Try to collect all coins and finish the game by going through the exit!
+You can **quit** the game anytime by using `esc` or by clicking on the cross on the window.
 
-### MiniLibX Management
+### 2 - Map Bonus
+In the folder **so_long**, run the command to compile program `so_long`
+```
+make fclean && make bonus
+```
+Run `so_long_bonus` by choosing the valid map you want
+```
+./so_long_bonus map/bonus/<name_of_map>.ber
+```
+Try to avoid touching the enemy patrol, collect all coins, finish the game by going through the exit!
+You can **quit** the game anytime by using `esc` or by clicking on the cross on the window.
 
-### In-game Events
+### 3 - Create New Map
+Create new map `.ber` file with:
+- `1` for Wall
+- `0` for Floor
+- `C` for Coin
+- `E` for Exit
+- `I` for EnemIes (works only with `so_long_bonus`)
+- `P` fot Player
 
-### Extra
+> If you use Vim to create the map, make sure to use `:set binary` or `:set noeol` before quit
+> (because VIM always adds an unwanted `\n` at eof)
+
+#### **Then enjoy the game!**
+
+---
+## 🐛 Issues and Bugs
+Please feel free to create a new issue with its title and description on the `issues` page of this [42cursus-so_long](https://github.com/Kr1sNg/42cursus-so_long/) repository. If you have already found the solution to the problem, I would love to review your `pull request`!
 
 ---
 #### Reference
