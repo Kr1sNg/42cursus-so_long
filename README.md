@@ -43,7 +43,7 @@ Header file `mlx.h` should be included for a correct use of the MiniLibX API.
 #### 2 - Initiation
 #### `mlx_init`
 function will create connection between software and the display. It must be called before using any other functions.
-```
+```c
 void	*mlx_init()
 ```
 No parameters are needed, and it will return a `void *` identifier, used for further calls to the library routines.
@@ -54,7 +54,7 @@ Free MLX
 #### 3 - Managing windows
 #### `mlx_new_window`
 Create a new windlow on the screen
-```
+```c
 void	*mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title)
 ```
 - `mlx_prt`	: connection identifier returned by `mlx_init()`
@@ -70,7 +70,7 @@ otherwise a non-null poiter is returned as a window identifier.
 
 #### `mlx_clear_window` and `mlx_destroy_window`
 Respectively clear (in black) and destroy (`free()`) the given window.
-```
+```c
 int	mlx_clear_window(void *mlx_ptr, void *win_ptr);
 int	mlx_destroy_window(void *mlx_ptr, void *win_ptr);
 ```
@@ -81,7 +81,7 @@ They both use the same parameters:
 #### 4 - Drawing inside windows
 #### `mlx_pixel_put` and `mlx_string_put`
 This function draws a defined pixel or `string` in the window `win_ptr` using the (`x`, `y`) coordinates, and the specified `color`.
-```
+```c
 int	mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 int	mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color, char *string);
 ```
@@ -90,7 +90,7 @@ The `color` parameter has an integer type, using RGB color mode.
 #### 5 - Manipulating images
 #### `mlx_new_image`
 creates a new image in memory
-```
+```c
 void	*mlx_new_image(void *mlx_ptr, int width, int height);
 ```
 It returns a `void *` identifier needed to manipulate this image later, or `NULL` if an error occurs. It only needs the size of the image to be created, using the `width` and `height` parameters, and the `mlx_ptr` connection identifier.
@@ -101,7 +101,7 @@ User can draw inside the image, and can dump the image inside a specified window
 
 #### `mlx_put_image_to_window`
 Three identifiers are needed here, for the connection to the display `mlx_ptr`, the window to use `win_ptr`, and the image `img_ptr`
-```
+```c
 int	mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr, int x, int y);
 ```
 - `x` : vertical location
@@ -109,7 +109,7 @@ int	mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr, int x, 
 
 #### `mlx_get_data_addr`
 This function returns information about the created image, allowing user to modify it later.
-```
+```c
 char	*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel, int *size_line, int *endian);
 ```
 - `img_ptr` : the identifier to specify the image to use
@@ -121,7 +121,7 @@ It returns a `char *` address that represents the beginning of the memory area w
 
 #### `mlx_destroy_image`
 Frees the given image
-```
+```c
 int	mlx_destroy_image(void *mlx_ptr, void *img_ptr);
 ```
 
@@ -129,7 +129,7 @@ int	mlx_destroy_image(void *mlx_ptr, void *img_ptr);
 Depending on the display, the number of bits used to store a pixel color can change.
 #### `mlx_get_color_value`
 It takes a standard RGB `color` parameter, and returns an `unsigned int` value.
-```
+```c
 unsigned int	mlx_get_color_value(void *mlx_ptr, int color);
 ```
 
@@ -137,7 +137,7 @@ unsigned int	mlx_get_color_value(void *mlx_ptr, int color);
 #### `mlx_xpm_to_image` and `mlx_xpm_file_to_image`
 These functions will create a new image in the same way. They will fill it using the specified `xpm_data` or `filename`, depending on which function is used.
 
-```
+```c
 void	*mlx_xpm_to_image(void *mlx_ptr, char **xpm_data, int *width, int *height);
 void	*mlx_xpm_file_to_image(void *mlx_ptr, char *filename, int *width, int *height);
 ```
@@ -148,7 +148,7 @@ The X-Window (and MacOSX graphical) system is bi-directionnal. On one hand, it s
 
 #### `mlx_loop`
 This function never returns. It is an infinite loop that waits for an event, and then calls a user-defined function associated with this event.
-```
+```c
 int	mlx_loop(void *mlx_ptr);
 ```
 A single parameter is needed, the connection identifier `mlx_ptr`.
@@ -163,7 +163,7 @@ Each window can define a different function for the same event.
 #### `mlx_key_hook`, `mlx_mouse_hook`, `mlx_expose_hook` and `mlx_loop_hook` or `mlx_hook`
 
 Three functions `mlx_key_hook`, `mlx_mouse_hook`, `mlx_expose_hook` work exactly in the same way.
-```
+```c
 int	mlx_key_hook(void *win_ptr, int (*funct_ptr)(), void *param);
 int	mlx_mouse_hook(void *win_ptr, int (*funct_ptr)(), void *param);
 int	mlx_expose_hook(void *win_ptr, int (*funct_ptr)(), void *param);
@@ -174,7 +174,7 @@ They take the parameters:
 - `param` : The address will be passed to the function everytime it is called, and should be used to store the parmeters is might need.
 
 The function `mlx_loop_hook` will be called when no event occurs.
-```
+```c
 int	mlx_loop_hook(void *mlx_ptr, int (*funct_ptr)(), void *param);
 ```
 
@@ -185,13 +185,13 @@ int	mlx_loop_hook(void *mlx_ptr, int (*funct_ptr)(), void *param);
 To use MiniLibX functions, we need to link software with several libraries, include the MiniLibX library itself.
 
 To do this, simply add the following arguments at linking time:
-```
--lmlx -lXext -lX11
+```Makefile
+-lmlx -L/usr/X11/lib -lX11 -lXext
 ```
 We may need to specify the path to these libraries, using the `-L`
 
 In MacOS, we need to add link to include for headers of X11 with:
-```
+```Makefile
 -I /usr/X11/include
 ```
 
@@ -206,11 +206,11 @@ In MacOS, we need to add link to include for headers of X11 with:
 
 ### 1 - Map Mandatory
 In the folder **so_long**, run the command to compile program `so_long`
-```
+```bash
 make re
 ```
 Run `so_long` by choosing the valid map you want
-```
+```bash
 ./so_long map/valid/<name_of_map>.ber
 ```
 Try to collect all coins and finish the game by going through the exit!
@@ -218,11 +218,11 @@ You can **quit** the game anytime by using `esc` or by clicking on the cross on 
 
 ### 2 - Map Bonus
 In the folder **so_long**, run the command to compile program `so_long`
-```
+```bash
 make fclean && make bonus
 ```
 Run `so_long_bonus` by choosing the valid map you want
-```
+```bash
 ./so_long_bonus map/bonus/<name_of_map>.ber
 ```
 Try to avoid touching the enemy patrol, collect all coins, finish the game by going through the exit!
@@ -237,8 +237,8 @@ Create new map `.ber` file with:
 - `I` for EnemIes (works only with `so_long_bonus`)
 - `P` fot Player
 
-> If you use Vim to create the map, make sure to use `:set binary` or `:set noeol` before quit
-> (because VIM always adds an unwanted `\n` at eof)
+> If you use **Vim** to create the map, make sure to use `:set binary` or `:set noeol` before quit
+> (because **Vim** always adds an unwanted `\n` at eof)
 
 #### **Then enjoy the game!**
 
