@@ -3,7 +3,10 @@
 *A 42's project to create a small 2D game with **minilibx**.*
 
 ---
-![Screenshot from 2025-01-31 15-33-27](https://github.com/user-attachments/assets/d1c4522f-2f78-4b27-8f66-d17f18cdd8cf)
+
+<p align="center">
+  <img src="https://github.com/Kr1sNg/42cursus-so_long/blob/main/so_long.gif" />
+</p>
 
 ---
 
@@ -194,7 +197,9 @@ In MacOS, we need to add link to include for headers of X11 with:
 
 ---
 
-![Screenshot from 2025-01-31 15-36-01](https://github.com/user-attachments/assets/66ee7d99-89e2-4807-820c-af4fe4747fcc)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/66ee7d99-89e2-4807-820c-af4fe4747fcc" />
+</p>
 
 ---
 ## ▶️ Play the game
