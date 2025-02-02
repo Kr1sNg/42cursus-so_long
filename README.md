@@ -217,7 +217,7 @@ Try to collect all coins and finish the game by going through the exit!
 You can **quit** the game anytime by using `esc` or by clicking on the cross on the window.
 
 ### 2 - Map Bonus
-In the folder **so_long**, run the command to compile program `so_long`
+In the folder **so_long**, run the command to compile program `so_long_bonus`
 ```bash
 make fclean && make bonus
 ```
