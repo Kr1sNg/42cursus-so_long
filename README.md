@@ -237,6 +237,7 @@ Create new map `.ber` file with:
 - `I` for EnemIes (works only with `so_long_bonus`)
 - `P` fot Player
 
+> [!NOTE]
 > If you use **Vim** to create the map, make sure to use `:set binary` or `:set noeol` before quit
 > (because **Vim** always adds an unwanted `\n` at eof)
 
