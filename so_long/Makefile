@@ -6,7 +6,7 @@
 #    By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/26 23:27:36 by tat-nguy          #+#    #+#              #
-#    Updated: 2025/01/26 23:27:42 by tat-nguy         ###   ########.fr        #
+#    Updated: 2025/09/11 10:21:23 by tat-nguy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,9 @@ all:	$(LIBFT) $(MLX) $(NAME)
 
 bonus:	$(LIBFT) $(MLX)	$(BONUS)
 
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 # Build libft
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -72,7 +75,6 @@ clean:
 fclean:	clean
 	@$(RM) $(NAME) $(BONUS)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@$(MAKE) -C $(MLX_DIR) clean
 
 re: fclean all
 

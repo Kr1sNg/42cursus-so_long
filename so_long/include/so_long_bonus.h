@@ -6,7 +6,7 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 09:57:06 by tat-nguy          #+#    #+#             */
-/*   Updated: 2025/01/28 17:25:35 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2025/09/11 09:40:55 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 */
 
 # define SZ 32
+# define MAX_LINES 1024
 
 # define FLOOR '0'
 # define WALL '1'
